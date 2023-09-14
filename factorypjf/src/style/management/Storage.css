@@ -6,42 +6,21 @@
   padding-top: 30px;
 }
 
-table {
-  border: 1px solid;
-  margin-top: 10px;
-}
-td,
-th {
+.storage_wrap th {
   border: 1px solid;
   width: 200px;
   padding-left: 20px;
 }
 
-.search_box {
-  display: flex;
-  justify-content: flex-end;
+.storage_wrap td {
+  border: 1px solid;
+  width: 200px;
+  padding-left: 20px;
 }
 
-.search_box > :nth-child(1) {
-  margin-right: 20px;
-  height: 30px;
-}
 
 .text-box {
   margin-top: 20px;
-}
-
-.add_from {
-  margin-top: 40px;
-  display: flex;
-}
-
-.add_from > :nth-child(1) {
-  height: 30px;
-}
-
-.add_from > :nth-child(2) {
-  margin-left: 20px;
 }
 
 .right_input_sel {
@@ -62,3 +41,85 @@ th {
 .right_input_sel td{
   width: 200px !important;
 }
+
+.button_wrap{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button_wrap .button{
+  margin: 10px;
+}
+
+.inputBox{
+  border: 1px solid #000;
+}
+.input_wrap{
+  display: flex;
+  justify-content: flex-end;
+}
+.bottom{
+  margin-top: 30px;
+}
+
+.storage_scrollable_table {
+  height: 300px; 
+  overflow: auto; 
+  scrollbar-width: none;
+  display: table-caption;
+}
+
+.storage_scrollable_table::-webkit-scrollbar {
+  display: none; 
+}
+
+.storage_search_wrap {
+  display: flex;
+  justify-content: right;
+}
+
+.storage_search_wrap > div{
+  display: flex;
+  margin: 0 10px;
+}
+
+.storage_search_wrap > div > div{
+  margin: 0 5px;
+}
+
+.storage_search_wrap input{
+  width: 100px;
+}
+
+.storage_wrap th:nth-child(1),
+.storage_wrap td:nth-child(1){
+  width: 50px;
+}
+
+.storage_help_bg{
+  background-color: #000;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  opacity:0.5
+}
+
+.storage_help_modal {
+  background-color: #fff;
+  width: 700px;
+  height: 700px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.storage_help_modal > table> tbody > tr:hover > td{
+  background-color: #dadada;
+  cursor: pointer;
+}
+
