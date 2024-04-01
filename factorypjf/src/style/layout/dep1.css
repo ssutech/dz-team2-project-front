@@ -1,0 +1,53 @@
+.dap1 {
+  height: 100vh;
+  background-color: var(--main-color);
+  border: 1px solid #b9b9b9;
+  /* width: 63px; */
+  /* height: 954px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: none;
+}
+
+.icon_wrap > a > div {
+  margin: 55px 0px;
+  cursor: pointer;
+  position: relative;
+  margin-left: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 10px 0;
+}
+.icon_wrap > a > div>svg {
+  margin:0px 10px;
+}
+
+.icon_wrap > a > div::after {
+  position: absolute;
+  top: -39px;
+  left: 62px;
+  transform: translate(-50%, 0);
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+/* menu bar 재사용성을 위해 redux를 이용한 출력 -> 일단 div title 속성으로 대체 (230821 HJ) */
+/* .icon_wrap >a> div:nth-child(1):hover::after{
+  content: '생산관리';
+}
+.icon_wrap >a> div:nth-child(2):hover::after{
+  content: '입고관리';
+}
+.icon_wrap >a> div:nth-child(3):hover::after{
+  content: '출고관리';
+}
+.icon_wrap >a> div:nth-child(4):hover::after{
+  content: '재고관리';
+}
+.icon_wrap >a> div:nth-child(5):hover::after{
+  content: '기준정보관리';
+} */

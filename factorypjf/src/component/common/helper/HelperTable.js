@@ -2,7 +2,6 @@ import React from "react";
 
 import helperStyle from "style/common/helperModal.module.css";
 
-
 export default function HelperTable({ headers, items, onSelectCode }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable/> header is required.");
@@ -12,7 +11,7 @@ export default function HelperTable({ headers, items, onSelectCode }) {
   const headerValue = headers.map((header) => header.value);
 
   const onSelectHandler = (code) => {
-    onSelectCode(code)
+    onSelectCode(code);
   };
 
   return (
@@ -31,7 +30,8 @@ export default function HelperTable({ headers, items, onSelectCode }) {
           </tr>
         </thead>
       </table>
-      <table className={helperStyle["helper-table__data"]}>
+      <div className={helperStyle["helper-table__data"]}>
+      <table >
         <colgroup>
           {headers.map((header, idx) => {
             return <col key={idx} width={header.width}></col>;
@@ -42,17 +42,19 @@ export default function HelperTable({ headers, items, onSelectCode }) {
             /*headerValue를 key로 가진 item 값을 출력 */
             //code 컬럼이면 click handler
             <tr key={idx}>
-              {headers.map((header) =>
-                // isCodeColumn(key) ? (
+              {headers.map(
+                (header) => (
+                  // isCodeColumn(key) ? (
                   <td
-                    className={header.selectable&&helperStyle['clickable-col']}
+                    className={helperStyle["clickable-col"]}
                     key={header.value + idx}
                     onClick={() => {
-                      header.selectable&&onSelectHandler(item);
+                      onSelectHandler(item);
                     }}
                   >
                     {item[header.value]}
                   </td>
+                )
                 // ) : (
                 //   <td key={key + idx}>{item[key]}</td>
                 // )
@@ -61,6 +63,7 @@ export default function HelperTable({ headers, items, onSelectCode }) {
           ))}
         </tbody>
       </table>
+      </div>
     </>
   );
 }

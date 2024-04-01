@@ -1,0 +1,52 @@
+.helper-modal {
+  position: absolute;
+  z-index: 99;
+  width: 100vw;
+  height: 100%;
+  top: 0;
+}
+.back-drop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+}
+.overlay {
+  position: fixed;
+  left: 40%;
+  top: 25%;
+  box-shadow: 1px 1px 1px grey;
+  width: 20%;
+  height: 50%;
+  border-radius: 20px;
+  background-color: white;
+  z-index: 100;
+}
+.overlay input{
+  border: 1px solid var(--font-color);
+  height: 30px;
+}
+
+
+.clickable-col:hover {
+  cursor: pointer;
+}
+.modal_form{
+  text-align: center;
+  margin: 20px 0px;
+}
+.helper-table__data{
+  max-height: 100%;
+  overflow-y: scroll;
+}
+.wrap-helper__table{
+  height: 50%;
+  margin: 0px 15px;
+}
+.helper-modal td{
+  height: 2rem;
+}

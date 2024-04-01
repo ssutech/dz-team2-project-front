@@ -1,0 +1,32 @@
+.searchCom {
+  border: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+}
+td {
+  height: auto;
+}
+.searchCom input {
+  text-align: left;
+  border-radius: 2px;
+  border: 1px solid #b9b9b9;
+  background: #fff;
+}
+.searchCom label {
+  text-align: left;
+}
+
+.helperBtn {
+  border: 0px;
+  color: #ffffff;
+  background: #5390f0;
+  border-radius: 10px;
+  padding: 0px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  margin-left: 5px;
+}

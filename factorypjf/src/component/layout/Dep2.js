@@ -1,82 +1,148 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import "../../style/layout/dep2.css";
-import { BiSolidFactory } from "react-icons/bi";
-import { BsFillBookmarkFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { menuActions } from "redux/reducers/menu";
 
-const Dep2 = () => {
+const Dep2 = ({ bookMarkList, currentTab, subMenu }) => {
   const currentMenu = useSelector((state) => state.currentMenu.currentMenu);
+
+  const location = useLocation();
+  const pathParts = location.pathname.split("/").slice(2);
+  const currentPage = pathParts.length > 0 ? "/" + pathParts.join("/") : location.pathname;
+
+
+  const dispatch = useDispatch();
+
   const currentMenuName = useSelector(
     (state) => state.currentMenu.currentMenuName
   );
 
-  const subMenu = {
-    production: [
-      { link: "", name: "생산등록" },
-      { link: "/list", name: "생산내역조회" },
-      { link: "/line", name: "생산라인관리" },
-    ],
-    inbound: [
-      { link: "", name: "입고예정" },
-      { link: "/ing", name: "입고중" },
-      { link: "/after", name: "입고완료" },
-    ],
-    outbound: [
-      { link: "", name: "출고예정" },
-      { link: "/ing", name: "출고중" },
-      { link: "/after", name: "출고완료" },
-    ],
-    setting: [
-      { link: "", name: "기준정보1" },
-      { link: "/ing", name: "기준정보2" },
-      { link: "/after", name: "기준정보3" },
-    ],
-    storage: [
-      { link: "", name: "재고조회" },
-      { link: "/registration", name: "기초재고등록" },
-    ],
-  };
+  function findMenuNameByUrl(url) {
+    for (let menuKey in subMenu) {
+      for (let menuItem of subMenu[menuKey]) {
+        if (menuItem.link.split("/")[1] === url.split("/")[2]) {
+          return menuItem.name;
+        }
+      }
+    }
+    return null;
+  }
+
+  function setMenu(url) {
+    const menu = findMenuByUrl(url);
+    if (menu) {
+      dispatch(menuActions.setBookmarkMenu(menu));
+    }
+  }
+
+  function findMenuByUrl(url) {
+    let menuValue = url.split("/")[1];
+    let menuNameValue = "";
+
+    if (menuValue === "management") {
+      menuNameValue = "기준정보관리";
+    } else if (menuValue === "production") {
+      menuNameValue = "생산관리";
+    } else if (menuValue === "inbound") {
+      menuNameValue = "입고관리";
+    } else if (menuValue === "outbound") {
+      menuNameValue = "출고관리";
+    } else if (menuValue === "storage") {
+      menuNameValue = "재고관리";
+    }
+
+    return { menu: menuValue, menuName: menuNameValue };
+  }
+
+  useEffect(() => {
+    console.log(currentPage);
+  }, [currentTab]);
 
   return (
     <div className="dep2_wrap">
       <div className="menu1">
         <div>
           <div className="menu_title">
-            <div>
-              <BiSolidFactory size={40} color="#fff" />
-            </div>
+            {/* <div>
+              <LuFactory
+                size={40}
+                color="#fff"
+                style={{ display: currentMenu == "production" ? "" : "none" }}
+              />
+              <FiPlusSquare
+                size={40}
+                color="#fff"
+                style={{ display: currentMenu == "inbound" ? "" : "none" }}
+              />
+              <FiMinusSquare
+                size={40}
+                color="#fff"
+                style={{ display: currentMenu == "outbound" ? "" : "none" }}
+              />
+              <MdOutlineInventory2
+                size={40}
+                color="#fff"
+                style={{ display: currentMenu == "storage" ? "" : "none" }}
+              />
+              <BsInfoCircle
+                size={40}
+                color="#fff"
+                style={{ display: currentMenu == "management" ? "" : "none" }}
+              />
+            </div> */}
             <div>{currentMenuName}</div>
           </div>
           <div className="menu_sub_wrap">
-            {subMenu[currentMenu].map((el, index) => (
-              <div key={index}>
-                <Link to={currentMenu + el.link}>
-                  <span>{el.name}</span>
-                </Link>
-              </div>
-            ))}
+            {currentTab &&
+              subMenu[currentMenu].map((el, index) => (
+                <div>
+                  <div
+                    key={index}
+                    style={{
+                      backgroundColor:
+                        "/" + currentMenu + el.link == currentPage
+                          ? "#5390F0"
+                          : "",
+                    }}
+                  >
+                    <Link to={"/" + currentTab + "/" + currentMenu + el.link}>
+                      <div
+                        style={{
+                          color:
+                            "/" + currentMenu + el.link == currentPage
+                              ? "#fff"
+                              : "",
+                        }}
+                      >
+                        {el.name}
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
       </div>
       <div className="menu2">
         <div className="menu_title">
-          <div>
+          {/* <div>
             <BsFillBookmarkFill size={25} color="#fff" />
-          </div>
+          </div> */}
           <div>즐겨찾기</div>
         </div>
         <div className="menu_sub_wrap">
-          <div>
-            <span>즐겨찾기-1</span>
-          </div>
-          <div>
-            <span>즐겨찾기-2</span>
-          </div>
-          <div>
-            <span>즐겨찾기-3</span>
-          </div>
+          {bookMarkList &&
+            bookMarkList.map((data, index) => (
+              <div>
+                <div>
+                  <Link to={"/" + currentTab + data.pageUrl} onClick={() => setMenu(data.pageUrl)}>
+                    <div>{findMenuNameByUrl(data.pageUrl)}</div>
+                  </Link>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </div>
